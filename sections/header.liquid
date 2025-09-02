@@ -9,20 +9,17 @@
     </a>
 
     <nav class="header__nav" aria-label="Main navigation">
-    <a href="/collections/all">Shop</a>
+  <a href="/collections/all">Shop</a>
 
-    {% if pages['about'] %}
-      <a href="{{ pages['about'].url }}">About</a>
-    {% else %}
-      <a href="/pages/about">About</a>
-    {% endif %}
+  {% assign about_page = pages['about'] %}
+  <a href="{% if about_page %}{{ about_page.url }}{% else %}/pages/about{% endif %}">About</a>
 
-    {% if pages['contact'] %}
-      <a href="{{ pages['contact'].url }}">Contact</a>
-    {% else %}
-      <a href="/pages/contact">Contact</a>
-    {% endif %}
-    </nav>
+  {% assign contact_page = pages['contact'] %}
+  <a href="{% if contact_page %}{{ contact_page.url }}{% else %}/pages/contact{% endif %}">Contact</a>
+
+  <a href="{{ routes.cart_url }}" class="btn btn--ghost">Cart ({{ cart.item_count }})</a>
+</nav>
+
 
 
     <a href="{{ routes.cart_url }}" class="btn btn--ghost">Cart ({{ cart.item_count }})</a>
