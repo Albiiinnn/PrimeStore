@@ -1,0 +1,20 @@
+<footer class="footer">
+  <div class="container footer__row">
+    <div>
+      <strong>{{ shop.name }}</strong><br>
+      © {{ 'now' | date: '%Y' }}. All rights reserved.
+    </div>
+    <div>
+      <a href="{{ routes.policy_privacy_url }}">Privacy</a> ·
+      <a href="{{ routes.policy_refund_url }}">Refunds</a> ·
+      <a href="{{ routes.policy_terms_of_service_url }}">Terms</a>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": []
+}
+{% endschema %}

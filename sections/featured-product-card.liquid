@@ -1,0 +1,18 @@
+{% assign p = section.settings.product %}
+<section class="container" style="padding:40px 0">
+  {% if p %}
+    {% render 'product-card', product: p %}
+  {% else %}
+    <p>Select a product in this section’s settings.</p>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Featured product card",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" }
+  ],
+  "presets": [{ "name": "Featured product card" }]
+}
+{% endschema %}

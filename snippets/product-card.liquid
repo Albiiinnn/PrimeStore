@@ -1,0 +1,30 @@
+{% assign v = product.selected_or_first_available_variant %}
+<article class="card">
+  <a class="card__media" href="{{ product.url }}">
+    {% if product.featured_media %}
+      {{ product.featured_media | image_url: width: 900 | image_tag: alt: product.title, loading: 'lazy' }}
+    {% else %}
+      <div style="height:100%;display:grid;place-items:center;color:#888">No image</div>
+    {% endif %}
+  </a>
+  <div class="card__body">
+    <h3 class="card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <div class="price">
+      {% if v.compare_at_price > v.price %}
+        <strong>{{ v.price | money }}</strong>
+        <s>{{ v.compare_at_price | money }}</s>
+      {% else %}
+        <strong>{{ v.price | money }}</strong>
+      {% endif %}
+      {% unless v.available %}<span class="badge">Sold out</span>{% endunless %}
+    </div>
+    <div style="margin-top:10px">
+      <form method="post" action="/cart/add">
+        <input type="hidden" name="id" value="{{ v.id }}">
+        <button class="btn" type="submit" {% unless v.available %}disabled{% endunless %}>
+          {% if v.available %}Add to cart{% else %}Unavailable{% endif %}
+        </button>
+      </form>
+    </div>
+  </div>
+</article>

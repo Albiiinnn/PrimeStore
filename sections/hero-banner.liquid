@@ -1,0 +1,28 @@
+<section class="hero">
+  <div class="container hero__wrap">
+    <div>
+      <h1 class="hero__title">{{ section.settings.heading }}</h1>
+      <p class="hero__subtitle">{{ section.settings.subheading }}</p>
+      {% if section.settings.cta_label != blank %}
+        <a class="btn" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+      {% endif %}
+    </div>
+    {% if section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 1200 | image_tag: alt: section.settings.heading }}
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero banner",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Welcome to {{ shop.name }}" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Quality gear. Fair prices. Fast shipping." },
+    { "type": "image_picker", "id": "image", "label": "Right image" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop now" },
+    { "type": "url", "id": "cta_link", "label": "Button link", "default": "/collections/all" }
+  ],
+  "presets": [{ "name": "Hero banner" }]
+}
+{% endschema %}

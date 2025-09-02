@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "main": { "type": "featured-product-card", "settings": { "product": "" } }
+  },
+  "order": ["main"]
+}

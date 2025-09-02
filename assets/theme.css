@@ -1,0 +1,29 @@
+:root { --container: 1200px; --gap: 16px; --radius: 16px; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; color: #111; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+.container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gap); }
+.header { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid #eee; }
+.header__row { display: flex; align-items: center; gap: var(--gap); padding: 12px 0; }
+.header__brand { font-weight: 700; font-size: 20px; }
+.header__nav { margin-left: auto; display: flex; gap: 14px; }
+.btn { display: inline-block; padding: 12px 18px; border-radius: 999px; background: #111; color: #fff; font-weight: 600; }
+.btn--ghost { background: transparent; border: 1px solid #111; color: #111; }
+.hero { padding: 48px 0; background: linear-gradient(135deg,#ffe7ef,#e9f4ff); }
+.hero__wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: center; }
+.hero__title { font-size: clamp(28px, 4vw, 48px); line-height: 1.1; margin: 0 0 12px; }
+.hero__subtitle { opacity: .75; margin-bottom: 20px; }
+.grid { display: grid; gap: 16px; }
+.grid--4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+@media (max-width: 900px){ .hero__wrap{grid-template-columns:1fr} .grid--4{grid-template-columns:repeat(2,1fr);} }
+.card { border: 1px solid #eee; border-radius: var(--radius); overflow: hidden; background: #fff; }
+.card__media { aspect-ratio: 1/1; overflow: hidden; background:#fafafa; }
+.card__media img { width:100%; height:100%; object-fit:cover; }
+.card__body { padding: 12px; }
+.card__title { font-weight: 600; margin: 0 0 6px; font-size: 14px; }
+.price { display:flex; gap:8px; align-items: baseline; }
+.price s { color:#888; font-size: 13px; }
+.badge { font-size: 12px; padding: 2px 8px; border: 1px solid #ddd; border-radius: 999px; }
+.footer { padding: 40px 0; border-top: 1px solid #eee; background:#fafafa; margin-top: 48px; }
+.footer__row { display:flex; flex-wrap:wrap; gap: 24px; }
