@@ -9,6 +9,8 @@
  */
 {
   "current": {
+    "favicon": "shopify://shop_images/IMG_4597_1.jpg",
+    "logo": "shopify://shop_images/IMG_4597_1.jpg",
     "sections": {
       "header": {
         "type": "header",
@@ -18,9 +20,10 @@
       "hero-banner": {
         "type": "hero-banner",
         "settings": {
-          "heading": "Welcome to {{ shop.name }}",
-          "subheading": "Quality gear. Fair prices. Fast shipping.",
-          "cta_label": "Shop now",
+          "heading": "PRIME — Sportswear, Redefined",
+          "subheading": "Elevate your game on and off the field.",
+          "image": "shopify://shop_images/ManUR7Back_20250901_125920686.jpg",
+          "cta_label": "Shop PRIME",
           "cta_link": "shopify://collections/all"
         }
       },
