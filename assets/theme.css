@@ -29,3 +29,10 @@ img { max-width: 100%; display: block; }
 .footer__row { display:flex; flex-wrap:wrap; gap: 24px; }
 .header__brand { display: inline-flex; align-items: center; }
 .header__brand .header__logo { height: 36px; width: auto; display: block; }
+.hero-banner img {
+  object-fit: contain;   /* prevents stretching */
+  max-height: 400px;     /* adjust as needed */
+  width: auto;
+  margin: 0 auto;
+  display: block;
+}
