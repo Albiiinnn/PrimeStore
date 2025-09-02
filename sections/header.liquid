@@ -9,10 +9,21 @@
     </a>
 
     <nav class="header__nav" aria-label="Main navigation">
-      <a href="/collections/all">Shop</a>
+    <a href="/collections/all">Shop</a>
+
+    {% if pages['about'] %}
+      <a href="{{ pages['about'].url }}">About</a>
+    {% else %}
       <a href="/pages/about">About</a>
+    {% endif %}
+
+    {% if pages['contact'] %}
+      <a href="{{ pages['contact'].url }}">Contact</a>
+    {% else %}
       <a href="/pages/contact">Contact</a>
+    {% endif %}
     </nav>
+
 
     <a href="{{ routes.cart_url }}" class="btn btn--ghost">Cart ({{ cart.item_count }})</a>
   </div>
