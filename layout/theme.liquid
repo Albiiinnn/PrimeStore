@@ -6,6 +6,10 @@
   <title>{{ page_title }}{% if current_tags %} – {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} – Page {{ current_page }}{% endif %}{% if shop.name %} – {{ shop.name }}{% endif %}</title>
   {{ 'theme.css' | asset_url | stylesheet_tag }}
   {{ content_for_header }}
+  {% if settings.favicon != blank %}
+  <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+{% endif %}
+
 </head>
 <body>
   {% section 'header' %}
