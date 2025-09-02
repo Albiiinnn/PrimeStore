@@ -27,3 +27,5 @@ img { max-width: 100%; display: block; }
 .badge { font-size: 12px; padding: 2px 8px; border: 1px solid #ddd; border-radius: 999px; }
 .footer { padding: 40px 0; border-top: 1px solid #eee; background:#fafafa; margin-top: 48px; }
 .footer__row { display:flex; flex-wrap:wrap; gap: 24px; }
+.header__brand { display: inline-flex; align-items: center; }
+.header__brand .header__logo { height: 36px; width: auto; display: block; }

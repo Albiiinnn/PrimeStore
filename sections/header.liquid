@@ -1,18 +1,19 @@
 <header class="header">
   <div class="container header__row">
-    <a class="header__brand" href="{{ routes.root_url }}">{{ shop.name }}</a>
+    <a class="header__brand" href="{{ routes.root_url }}">
+      {% if settings.logo != blank %}
+        {{ settings.logo | image_url: width: 260 | image_tag: alt: shop.name, class: 'header__logo' }}
+      {% else %}
+        {{ shop.name }}
+      {% endif %}
+    </a>
+
     <nav class="header__nav" aria-label="Main navigation">
       <a href="/collections/all">Shop</a>
       <a href="/pages/about">About</a>
       <a href="/pages/contact">Contact</a>
     </nav>
+
     <a href="{{ routes.cart_url }}" class="btn btn--ghost">Cart ({{ cart.item_count }})</a>
   </div>
 </header>
-
-{% schema %}
-{
-  "name": "Header",
-  "settings": []
-}
-{% endschema %}
