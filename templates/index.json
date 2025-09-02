@@ -1,7 +1,10 @@
 {
   "sections": {
     "hero": { "type": "hero-banner", "settings": {} },
-    "featured": { "type": "featured-collection-grid", "settings": { "title": "Featured" } }
+    "featured": {
+      "type": "featured-collection-grid",
+      "settings": { "title": "Featured" }
+    }
   },
   "order": ["hero", "featured"]
 }
