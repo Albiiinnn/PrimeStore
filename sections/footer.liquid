@@ -2,19 +2,15 @@
   <div class="container footer__row">
     <div>
       <strong>{{ shop.name }}</strong><br>
+      {{ settings.brand_tagline }}<br>
       © {{ 'now' | date: '%Y' }}. All rights reserved.
     </div>
     <div>
+      {% if settings.instagram_url != blank %}<a href="{{ settings.instagram_url }}" target="_blank" rel="noopener">Instagram</a>{% endif %}
+      {% if settings.tiktok_url != blank %} · <a href="{{ settings.tiktok_url }}" target="_blank" rel="noopener">TikTok</a>{% endif %} ·
       <a href="{{ routes.policy_privacy_url }}">Privacy</a> ·
       <a href="{{ routes.policy_refund_url }}">Refunds</a> ·
       <a href="{{ routes.policy_terms_of_service_url }}">Terms</a>
     </div>
   </div>
 </footer>
-
-{% schema %}
-{
-  "name": "Footer",
-  "settings": []
-}
-{% endschema %}
