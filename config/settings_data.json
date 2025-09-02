@@ -12,6 +12,7 @@
     "sections": {
       "header": {
         "type": "header",
+        "custom_css": [],
         "settings": {}
       },
       "hero-banner": {
@@ -36,6 +37,13 @@
         "settings": {}
       }
     },
-    "content_for_index": []
+    "content_for_index": [],
+    "blocks": {
+      "14817159935668535939": {
+        "type": "shopify://apps/atlas-ai-store-builder/blocks/licensing/ff382ac5-0af5-4ea9-a13a-234e8976ca8b",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   }
 }
