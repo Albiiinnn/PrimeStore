@@ -36,3 +36,24 @@ img { max-width: 100%; display: block; }
   margin: 0 auto;
   display: block;
 }
+/* Right-side hero image should keep aspect ratio */
+.hero__media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__image {
+  width: auto;          /* don't stretch horizontally */
+  height: auto;         /* don't stretch vertically   */
+  max-width: 100%;      /* keep within the grid cell  */
+  max-height: 520px;    /* adjust to taste            */
+  object-fit: contain;  /* preserve aspect ratio      */
+}
+
+/* Optional: make the image a bit smaller on small screens */
+@media (max-width: 900px){
+  .hero__image { max-height: 380px; }
+}
+.hero__media { justify-content: flex-end; }
+.hero__image { border-radius: 12px; }
