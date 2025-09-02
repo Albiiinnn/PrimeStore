@@ -1,6 +1,9 @@
 {
   "sections": {
-    "main": { "type": "about-richtext", "settings": {} }
+    "main": {
+      "type": "about-richtext",
+      "settings": {}
+    }
   },
   "order": ["main"]
 }
