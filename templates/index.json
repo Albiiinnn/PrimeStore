@@ -1,10 +1,7 @@
 {
   "sections": {
     "hero": { "type": "hero-banner", "settings": {} },
-    "featured": {
-      "type": "featured-collection-grid",
-      "settings": { "title": "Featured" }
-    }
+    "newest": { "type": "newest-arrivals", "settings": { "title": "Newest arrivals", "limit": 8, "cta_label": "Shop more" } }
   },
-  "order": ["hero", "featured"]
+  "order": ["hero", "newest"]
 }

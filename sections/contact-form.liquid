@@ -1,0 +1,27 @@
+<section class="container" style="padding:40px 0; max-width: 900px;">
+  <h1 style="margin:0 0 16px">Contact us</h1>
+
+  {% form 'contact' %}
+    {% if form.posted_successfully? %}
+      <p>Thanks! We’ll get back to you shortly.</p>
+    {% endif %}
+    {% if form.errors %}
+      <p style="color:#c00">Please fix the errors below.</p>
+    {% endif %}
+
+    <div style="display:grid; gap:12px">
+      <input type="text" name="contact[name]" placeholder="Your name" value="{{ form.name | default: customer.name }}" required>
+      <input type="email" name="contact[email]" placeholder="Your email" value="{{ form.email | default: customer.email }}" required>
+      <textarea name="contact[body]" rows="6" placeholder="How can we help?" required></textarea>
+      <button class="btn" type="submit">Send message</button>
+    </div>
+  {% endform %}
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [],
+  "presets": [{ "name": "Contact form" }]
+}
+{% endschema %}

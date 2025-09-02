@@ -1,0 +1,36 @@
+{% comment %} PRIME – All products: newest 3 then older {% endcomment %}
+{% assign all_desc = collections.all.products | sort: 'created_at' | reverse %}
+{% assign newest = all_desc | slice: 0, 3 %}
+{% assign older = all_desc | slice: 3, all_desc.size | sort: 'created_at' %}
+
+<section class="container" style="padding:36px 0">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <h1 style="margin:0">All products</h1>
+    <a class="btn btn--ghost" href="/collections/all?sort_by=created-descending">Newest first</a>
+  </div>
+
+  {% if newest.size > 0 %}
+    <h3 style="margin: 12px 0">Newest arrivals</h3>
+    <div class="grid grid--4" style="margin-bottom: 24px">
+      {% for product in newest %}
+        {% render 'product-card', product: product %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if older.size > 0 %}
+    <h3 style="margin: 12px 0">More products</h3>
+    <div class="grid grid--4">
+      {% for product in older %}
+        {% render 'product-card', product: product %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "All products split",
+  "settings": []
+}
+{% endschema %}

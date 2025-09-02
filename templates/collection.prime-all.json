@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "main": { "type": "all-products-split", "settings": {} }
+  },
+  "order": ["main"]
+}

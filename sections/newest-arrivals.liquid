@@ -1,0 +1,32 @@
+{% comment %} PRIME – Newest Arrivals {% endcomment %}
+{% assign all_products = collections.all.products | sort: 'created_at' | reverse %}
+{% assign items = all_products | slice: 0, section.settings.limit %}
+
+<section class="container" style="padding:40px 0">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <h2 style="margin:0">{{ section.settings.title }}</h2>
+    <a class="btn btn--ghost" href="/collections/all?sort_by=created-descending">{{ section.settings.cta_label }}</a>
+  </div>
+
+  {% if items.size > 0 %}
+    <div class="grid grid--4">
+      {% for product in items %}
+        {% render 'product-card', product: product %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No products yet. Add products and ensure they’re available on Online Store.</p>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Newest arrivals",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Newest arrivals" },
+    { "type": "range", "id": "limit", "label": "Products to show", "min": 3, "max": 12, "step": 1, "default": 8 },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop more" }
+  ],
+  "presets": [{ "name": "Newest arrivals" }]
+}
+{% endschema %}
