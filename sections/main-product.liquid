@@ -1,0 +1,163 @@
+{% comment %} Main Product Section – PRIME {% endcomment %}
+{% assign p = product %}
+{% assign v = p.selected_or_first_available_variant %}
+
+<section class="pdp">
+  <div class="container pdp__wrap" itemscope itemtype="https://schema.org/Product">
+    <!-- GALLERY -->
+    <div class="pdp__gallery">
+      {% if p.media.size > 0 %}
+        <div class="pdp__media-main">
+          {{ p.media.first | image_url: width: 1400 | image_tag: alt: p.title, id: 'pdpMain', loading: 'eager' }}
+        </div>
+        <div class="pdp__thumbs">
+          {% for m in p.media %}
+            <button class="pdp__thumb" data-media-id="{{ m.id }}" aria-label="View image {{ forloop.index }}">
+              {{ m | image_url: width: 240 | image_tag: alt: p.title }}
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- BUY BOX -->
+    <div class="pdp__buybox" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+      <h1 class="pdp__title" itemprop="name">{{ p.title }}</h1>
+
+      {% if section.settings.show_vendor and p.vendor != blank %}
+        <div class="pdp__vendor">{{ p.vendor }}</div>
+      {% endif %}
+
+      <div class="pdp__price" data-price>
+        {% if v.compare_at_price > v.price %}
+          <strong class="pdp__price-now">{{ v.price | money }}</strong>
+          <s class="pdp__price-was">{{ v.compare_at_price | money }}</s>
+          <span class="pdp__badge">Sale</span>
+        {% else %}
+          <strong class="pdp__price-now">{{ v.price | money }}</strong>
+        {% endif %}
+        {% unless v.available %}<span class="pdp__badge is-out">Sold out</span>{% endunless %}
+      </div>
+
+      <!-- VARIANT PICKERS -->
+      {% if p.has_only_default_variant == false %}
+        {% for option in p.options_with_values %}
+          <div class="pdp__option">
+            <label class="pdp__label">{{ option.name }}</label>
+            <div class="pdp__swatches">
+              {% for val in option.values %}
+                {% assign selected = option.selected_value == val %}
+                <button
+                  class="pdp__swatch{% if selected %} is-active{% endif %}"
+                  data-option-index="{{ forloop.parentloop.index0 }}"
+                  data-option-value="{{ val | escape }}"
+                  type="button">
+                  {{ val }}
+                </button>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <!-- ATC FORM -->
+      <form method="post" action="/cart/add" id="pdpForm">
+        <input type="hidden" name="id" value="{{ v.id }}" id="pdpVariantId">
+        <div class="pdp__qty">
+          <label for="pdpQty">Qty</label>
+          <input id="pdpQty" name="quantity" type="number" min="1" value="1">
+        </div>
+        <button class="btn pdp__atc" type="submit" {% unless v.available %}disabled{% endunless %}>
+          {% if v.available %}Add to cart{% else %}Unavailable{% endif %}
+        </button>
+      </form>
+
+      <!-- TRUST/INFO -->
+      <ul class="pdp__bullets">
+        <li>Fast shipping</li>
+        <li>Secure checkout</li>
+        <li>30-day returns</li>
+      </ul>
+
+      <!-- ACCORDIONS -->
+      <details class="pdp__acc" open>
+        <summary>Details</summary>
+        <div class="pdp__acc-body" itemprop="description">
+          {{ p.description | default: "Premium performance fabric, built for training and everyday wear." }}
+        </div>
+      </details>
+
+      <details class="pdp__acc">
+        <summary>Fabric & care</summary>
+        <div class="pdp__acc-body">
+          100% polyester. Machine wash cold, tumble dry low. Do not iron print.
+        </div>
+      </details>
+
+      <details class="pdp__acc">
+        <summary>Shipping & returns</summary>
+        <div class="pdp__acc-body">
+          Free shipping over $50. 30-day returns on unworn items. See our policy for details.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const product = {{ product | json }};
+    const form = document.getElementById('pdpForm');
+    const idInput = document.getElementById('pdpVariantId');
+    const priceEl = document.querySelector('[data-price]');
+    const mainImg = document.getElementById('pdpMain');
+
+    // thumbs -> swap main image
+    document.querySelectorAll('.pdp__thumb').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const mediaId = btn.getAttribute('data-media-id');
+        const media = product.media.find(m => m.id == mediaId);
+        if (media && media.src) mainImg.src = media.src;
+      });
+    });
+
+    // option swatches -> pick matching variant
+    function selectVariant() {
+      const selected = [];
+      document.querySelectorAll('.pdp__option').forEach((wrap, i) => {
+        const active = wrap.querySelector('.pdp__swatch.is-active');
+        selected[i] = active ? active.textContent.trim() : null;
+      });
+      const match = product.variants.find(v => JSON.stringify(v.options) === JSON.stringify(selected));
+      if (match) {
+        idInput.value = match.id;
+        // update price
+        const priceNow = (match.price/100).toLocaleString(undefined,{style:'currency',currency: product.priceV2 ? product.priceV2.currencyCode : '{{ shop.currency }}'});
+        const compare = match.compare_at_price ? (match.compare_at_price/100).toLocaleString(undefined,{style:'currency',currency: '{{ shop.currency }}'}) : null;
+        priceEl.innerHTML = compare && match.compare_at_price > match.price
+          ? `<strong class="pdp__price-now">${priceNow}</strong><s class="pdp__price-was">${compare}</s><span class="pdp__badge">Sale</span>`
+          : `<strong class="pdp__price-now">${priceNow}</strong>`;
+        // disable ATC if unavailable
+        document.querySelector('.pdp__atc').disabled = !match.available;
+      }
+    }
+
+    document.querySelectorAll('.pdp__swatch').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const wrap = e.currentTarget.closest('.pdp__option');
+        wrap.querySelectorAll('.pdp__swatch').forEach(s => s.classList.remove('is-active'));
+        e.currentTarget.classList.add('is-active');
+        selectVariant();
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": [
+    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false }
+  ]
+}
+{% endschema %}

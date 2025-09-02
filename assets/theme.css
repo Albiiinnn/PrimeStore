@@ -57,3 +57,37 @@ img { max-width: 100%; display: block; }
 }
 .hero__media { justify-content: flex-end; }
 .hero__image { border-radius: 12px; }
+/* PDP layout */
+.pdp { padding: 28px 0 60px; }
+.pdp__wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: start; }
+@media (max-width: 960px){ .pdp__wrap{ grid-template-columns: 1fr; } }
+
+/* Gallery */
+.pdp__media-main img { width:100%; height:auto; border-radius: 12px; }
+.pdp__thumbs { margin-top: 12px; display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 10px; }
+.pdp__thumb { padding:0; border:1px solid #eee; border-radius:10px; overflow:hidden; background:#fff; cursor:pointer; }
+.pdp__thumb img{ width:100%; height:auto; display:block; }
+
+/* Buybox */
+.pdp__buybox { position: sticky; top: 84px; }
+.pdp__title { margin: 0 0 6px; font-size: clamp(22px, 4vw, 34px); line-height: 1.15; }
+.pdp__vendor { opacity:.7; margin-bottom: 8px; }
+.pdp__price { display:flex; align-items: baseline; gap:10px; margin: 6px 0 16px; }
+.pdp__price-now { font-weight:700; font-size: 22px; }
+.pdp__price-was { color:#888; }
+.pdp__badge { font-size:12px; padding:2px 8px; border:1px solid #ddd; border-radius:999px; }
+.pdp__badge.is-out { border-color:#f33; color:#f33; }
+.pdp__option { margin: 14px 0; }
+.pdp__label { display:block; font-size: .9rem; opacity:.8; margin-bottom:6px; }
+.pdp__swatches { display:flex; flex-wrap:wrap; gap:8px; }
+.pdp__swatch { border:1px solid #ddd; background:#fff; padding:8px 12px; border-radius:999px; cursor:pointer; }
+.pdp__swatch.is-active { border-color:#111; }
+.pdp__qty { display:flex; align-items:center; gap:10px; margin: 14px 0; }
+.pdp__qty input{ width:70px; padding:8px; border:1px solid #ddd; border-radius:8px; }
+.pdp__atc { width: 100%; margin-top: 6px; }
+.pdp__bullets { margin: 16px 0 6px; padding-left: 18px; }
+
+/* Accordions */
+.pdp__acc { border-top: 1px solid #eee; padding: 14px 0; }
+.pdp__acc summary { cursor:pointer; font-weight:600; outline:none; }
+.pdp__acc-body { margin-top: 8px; color:#333; }
